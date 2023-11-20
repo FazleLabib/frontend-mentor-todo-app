@@ -21,10 +21,10 @@
     /* ### Dark Theme */
     
    --background-color: hsl(235, 21%, 11%);
-    /* - Very Dark Desaturated Blue: hsl(235, 24%, 19%);
-    - Light Grayish Blue: hsl(234, 39%, 85%);
-    - Light Grayish Blue (hover): hsl(236, 33%, 92%);
-    - Dark Grayish Blue: hsl(234, 11%, 52%);
+    --card-color: hsl(235, 24%, 19%);
+    --text-color: hsl(234, 39%, 85%);
+    --hover-text-color: hsl(236, 33%, 92%);
+    /*- Dark Grayish Blue: hsl(234, 11%, 52%);
     - Very Dark Grayish Blue: hsl(233, 14%, 35%);
     --VBlue: hsl(237, 14%, 26%);  */
 }
@@ -63,6 +63,25 @@ body {
     letter-spacing: 0.85rem;
     font-weight: 700;
     font-size: 2.5rem;
+}
+
+form {
+    background-color: var(--card-color);
+    padding: 1rem;
+    border-radius: 0.25rem;
+}
+
+input[type=text] {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: var(--text-color);
+    font-weight: 400;
+    font-size: 1.25rem;
+}
+
+::placeholder {
+    color: var(--text-color);
 }
 
 main {
