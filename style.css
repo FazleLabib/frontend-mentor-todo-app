@@ -50,6 +50,21 @@ body {
     background-size: contain;
 }
 
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 4rem 0;
+}
+
+.header h1 {
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.85rem;
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
 main {
     position: absolute;
     z-index: 1;
