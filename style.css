@@ -24,8 +24,8 @@
     --card-color: hsl(235, 24%, 19%);
     --text-color: hsl(234, 39%, 85%);
     --hover-text-color: hsl(236, 33%, 92%);
-    /*- Dark Grayish Blue: hsl(234, 11%, 52%);
-    - Very Dark Grayish Blue: hsl(233, 14%, 35%);
+    --border-color: hsl(234, 11%, 52%);
+    /*- Very Dark Grayish Blue: hsl(233, 14%, 35%);
     --VBlue: hsl(237, 14%, 26%);  */
 }
 
@@ -50,6 +50,10 @@ body {
     background-size: contain;
 }
 
+.container {
+    width: 30rem;
+}
+
 .header {
     display: flex;
     align-items: center;
@@ -66,9 +70,21 @@ body {
 }
 
 form {
+    display: flex;
+    gap: 1rem;
     background-color: var(--card-color);
     padding: 1rem;
     border-radius: 0.25rem;
+    margin-bottom: 2rem;
+}
+
+.add-task {
+    border: 1px solid var(--border-color);
+    background-color: transparent;
+    color: var(--card-color);
+    padding: 0.25rem 0.5rem;
+    border-radius: 50%;
+    font-size: 1.25rem;
 }
 
 input[type=text] {
