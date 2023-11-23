@@ -24,9 +24,9 @@
     --card-color: hsl(235, 24%, 19%);
     --text-color: hsl(234, 39%, 85%);
     --hover-text-color: hsl(236, 33%, 92%);
-    --border-color: hsl(234, 11%, 52%);
-    /*- Very Dark Grayish Blue: hsl(233, 14%, 35%);
-    --VBlue: hsl(237, 14%, 26%);  */
+    --secondary-text-color: hsl(234, 11%, 52%);
+    --border-color: hsl(233, 14%, 35%);
+    /* --VBlue: hsl(237, 14%, 26%); */
 }
 
 * {
@@ -48,6 +48,11 @@ body {
     background-position: center top, center;
     background-repeat: no-repeat;
     background-size: contain;
+}
+
+main {
+    position: absolute;
+    z-index: 1;
 }
 
 .container {
@@ -100,9 +105,32 @@ input[type=text] {
     color: var(--text-color);
 }
 
-main {
-    position: absolute;
-    z-index: 1;
+.task-container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--card-color);
+    border-radius: 0.25rem;
+}
+
+.task {
+    color: var(--text-color);
+    padding: 1rem;
+    font-size: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--secondary-text-color);
+    padding: 1rem;
+}
+
+.filters {
+    display: flex;
+    gap: 0.5rem;
+
 }
 
 footer {
