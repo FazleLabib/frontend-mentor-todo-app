@@ -6,7 +6,7 @@
     /* ### Primary */
     
     --bright-blue: hsl(220, 98%, 61%);
-    --check-background: linear-gradient(left to right, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+    --check-background: linear-gradient(to right, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
     
     /* ### Neutral */
     
@@ -113,10 +113,54 @@ input[type=text] {
 }
 
 .task {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     color: var(--text-color);
     padding: 1rem;
     font-size: 1.25rem;
     border-bottom: 1px solid var(--border-color);
+}
+
+.task .checkbox-container {
+    position: relative;
+}
+
+.task .checkbox-container label {
+    display: block;
+    height: 25px;
+    aspect-ratio: 1;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+}
+
+.task .checkbox-container label:after {
+    content: "";
+    position: absolute;
+    background-image: url(./images/icon-check.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 14px;
+    aspect-ratio: 1;
+    top: 8px;
+    left: 7px;
+    opacity: 0; 
+}
+
+.task .checkbox-container input[type="checkbox"] {
+    visibility: hidden;
+    display: none;
+    opacity: 0;
+}
+
+.task .checkbox-container input[type="checkbox"]:checked + label {
+    background-image: var(--check-background);
+    border-color: var(--card-color);
+}
+
+.task .checkbox-container input[type="checkbox"]:checked + label:after {
+    opacity: 1;
 }
 
 .options {
