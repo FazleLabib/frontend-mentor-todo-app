@@ -84,6 +84,8 @@ form {
 }
 
 .add-task {
+    height: 25px;
+    aspect-ratio: 1;
     border: 1px solid var(--border-color);
     background-color: transparent;
     color: var(--card-color);
