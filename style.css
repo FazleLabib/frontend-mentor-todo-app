@@ -165,6 +165,16 @@ input[type=text] {
     opacity: 1;
 }
 
+.task:hover{
+    cursor: pointer;
+}
+
+.task .checkbox-container label:hover {
+    border: 1px solid;
+    border-image: linear-gradient(to right, hsl(192, 100%, 67%), hsl(280, 87%, 65%)) 1;
+    /* Fix border radius issue */
+}   
+
 .task-content {
     display: flex;
     gap: 4rem;
