@@ -194,7 +194,7 @@ input[type=text] {
     display: flex;
     justify-content: center;
     color: var(--secondary-text-color);
-    margin-top: 4rem;
+    margin-top: 3rem;
 }
 
 footer {
