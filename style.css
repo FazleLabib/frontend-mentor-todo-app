@@ -207,6 +207,12 @@ input[type=text] {
     margin-top: 3rem;
 }
 
+.filters p:hover, #clear-completed:hover {
+    transition: .2s ease-in-out;
+    cursor: pointer;
+    color: var(--hover-text-color);
+}
+
 .selected {
     color: var(--bright-blue);
 }
