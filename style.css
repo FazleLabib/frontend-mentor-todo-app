@@ -20,13 +20,12 @@
     
     /* ### Dark Theme */
     
-   --background-color: hsl(235, 21%, 11%);
+    --background-color: hsl(235, 21%, 11%);
     --card-color: hsl(235, 24%, 19%);
     --text-color: hsl(234, 39%, 85%);
     --hover-text-color: hsl(236, 33%, 92%);
     --secondary-text-color: hsl(234, 11%, 52%);
     --border-color: hsl(233, 14%, 35%);
-    /* --VBlue: hsl(237, 14%, 26%); */
 }
 
 * {
@@ -112,6 +111,7 @@ input[type=text] {
     flex-direction: column;
     background-color: var(--card-color);
     border-radius: 0.25rem;
+    box-shadow: 20px 20px 50px -10px;
 }
 
 .task {
