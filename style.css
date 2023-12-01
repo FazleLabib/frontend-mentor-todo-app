@@ -176,8 +176,9 @@ input[type=text] {
 }   
 
 .task-content {
+    width: 100%;
     display: flex;
-    gap: 4rem;
+    justify-content: space-between;
 }
 
 .delete-task {
