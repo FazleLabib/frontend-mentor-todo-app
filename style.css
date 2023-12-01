@@ -182,9 +182,14 @@ input[type=text] {
 }
 
 .delete-task {
+    display: none;
     cursor: pointer;
     background-color: transparent;
     border: none;
+}
+
+.task-content:hover .delete-task {
+    display: block;
 }
 
 .options {
