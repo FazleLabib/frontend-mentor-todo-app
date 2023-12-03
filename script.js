@@ -1,6 +1,5 @@
 const input = document.getElementById('input');
 const addBtn = document.getElementById('add-task');
-const taskContainer = document.getElementById('task-container');
 
 function getTasks() {
 
@@ -20,7 +19,9 @@ function saveTasks(tasks) {
 
 function showTasks() {
 
-    taskContainer.innerHTML = '';
+    const remainingTasks = document.querySelector('.remaining-tasks');
+
+    remainingTasks.innerHTML = '';
   
     const tasks = getTasks();
   
@@ -64,8 +65,8 @@ function showTasks() {
   
         taskDiv.appendChild(checkboxContainer);
         taskDiv.appendChild(taskContentDiv);
-  
-        taskContainer.appendChild(taskDiv);
+        
+        remainingTasks.appendChild(taskDiv);
 
     });
 }
