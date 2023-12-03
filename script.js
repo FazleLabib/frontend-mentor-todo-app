@@ -1,6 +1,7 @@
 const input = document.getElementById('input');
 const addBtn = document.getElementById('add-task');
 const noTasks = document.getElementById('no-tasks');
+const itemsLeft = document.getElementById('items-left');
 
 function getTasks() {
 
@@ -25,6 +26,9 @@ function showTasks() {
     remainingTasks.innerHTML = '';
   
     const tasks = getTasks();
+
+    let taskCount = tasks.length;
+    itemsLeft.innerHTML = `${taskCount} items left`;
   
     tasks.forEach((task, index) => {
         const taskDiv = document.createElement('div');
