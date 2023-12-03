@@ -223,6 +223,16 @@ input[type=text] {
     color: var(--bright-blue);
 }
 
+#no-tasks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    color: var(--text-color);
+    font-size: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
 footer {
     position: absolute;
     bottom: 1rem;

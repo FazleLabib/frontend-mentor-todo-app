@@ -1,5 +1,6 @@
 const input = document.getElementById('input');
 const addBtn = document.getElementById('add-task');
+const noTasks = document.getElementById('no-tasks');
 
 function getTasks() {
 
@@ -69,6 +70,13 @@ function showTasks() {
         remainingTasks.appendChild(taskDiv);
 
     });
+
+    if (tasks.length === 0) {
+        noTasks.style.display = 'flex';
+    } else {
+        noTasks.style.display = 'none';
+    }
+    
 }
   
 function addTask() {
