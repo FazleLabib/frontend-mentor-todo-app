@@ -3,6 +3,8 @@ const addBtn = document.getElementById('add-task');
 const noTasks = document.getElementById('no-tasks');
 const itemsLeft = document.getElementById('items-left');
 
+const allBtn = document.getElementById('all');
+
 function getTasks() {
 
     let tasks = localStorage.getItem('tasks');
@@ -106,5 +108,7 @@ function deleteTask(index) {
 }
 
 addBtn.addEventListener('click', addTask);
+
+allBtn.addEventListener('click', showTasks);
 
 showTasks();
