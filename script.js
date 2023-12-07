@@ -3,6 +3,7 @@ const addBtn = document.getElementById('add-task');
 const noTasks = document.getElementById('no-tasks');
 const itemsLeft = document.getElementById('items-left');
 const allBtn = document.getElementById('all');
+const clearCompletedBtn = document.getElementById('clear-completed');
 
 function getTasks() {
 
@@ -119,7 +120,18 @@ function deleteTask(index) {
     showTasks();
 }
 
+function clearCompleted() {
+  const checkboxes = document.querySelectorAll('.checkbox-container input[type="checkbox"]');
+  let tasks = getTasks();
+
+  tasks = tasks.filter((task, index) => !checkboxes[index].checked);
+
+  saveTasks(tasks);
+  showTasks();
+}
+
 showTasks();
 
 addBtn.addEventListener('click', addTask);
 allBtn.addEventListener('click', showTasks);
+clearCompletedBtn.addEventListener('click', clearCompleted);
