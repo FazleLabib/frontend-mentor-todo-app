@@ -203,7 +203,17 @@ input[type=text] {
 .filters {
     display: flex;
     gap: 0.5rem;
-    
+}
+
+.filters button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+.filters button p {
+    font-size: 1rem;
+    color: var(--secondary-text-color);
 }
 
 .instruction {
@@ -217,10 +227,6 @@ input[type=text] {
     transition: .2s ease-in-out;
     cursor: pointer;
     color: var(--hover-text-color);
-}
-
-.selected {
-    color: var(--bright-blue);
 }
 
 #no-tasks {
