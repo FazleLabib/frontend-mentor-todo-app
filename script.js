@@ -3,6 +3,8 @@ const addBtn = document.getElementById('add-task');
 const noTasks = document.getElementById('no-tasks');
 const itemsLeft = document.getElementById('items-left');
 const allBtn = document.getElementById('all');
+const activeBtn = document.getElementById('active');
+const completedBtn = document.getElementById('completed');
 const clearCompletedBtn = document.getElementById('clear-completed');
 
 function getTasks() {
@@ -133,8 +135,36 @@ function clearCompleted() {
   showTasks();
 }
 
+const removeAllActive = () => {
+
+  allBtn.classList.remove('selected');
+  activeBtn.classList.remove('selected');
+  completedBtn.classList.remove('selected');
+
+};
+
+const handleButtonClick = (button) => {
+
+  removeAllActive();
+  button.classList.add('selected');
+  
+};
+
 showTasks();
 
 addBtn.addEventListener('click', addTask);
-allBtn.addEventListener('click', showTasks);
+
+allBtn.addEventListener('click', () => {
+    handleButtonClick(allBtn);
+    showTasks();
+});
+
+activeBtn.addEventListener('click', () => {
+    handleButtonClick(activeBtn);
+});
+
+completedBtn.addEventListener('click', () => {
+    handleButtonClick(completedBtn);
+});
+
 clearCompletedBtn.addEventListener('click', clearCompleted);
