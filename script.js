@@ -7,6 +7,25 @@ const activeBtn = document.getElementById('active');
 const completedBtn = document.getElementById('completed');
 const clearCompletedBtn = document.getElementById('clear-completed');
 
+const lightModeBtn = document.getElementById('light-mode-button');
+const darkModeBtn = document.getElementById('dark-mode-button');
+
+
+function toggleLight() {
+  document.body.classList.toggle('light-theme');
+  lightModeBtn.classList.remove('hidden');
+  darkModeBtn.classList.add('hidden');
+
+  document.querySelector('.background').style.backgroundImage = 'url("./images/bg-desktop-dark.jpg")';
+}
+
+function toggleDark() {
+  document.body.classList.toggle('light-theme');
+  lightModeBtn.classList.add('hidden');
+  darkModeBtn.classList.remove('hidden');
+  document.querySelector('.background').style.backgroundImage = 'url("./images/bg-desktop-light.jpg")';
+}
+
 function getTasks() {
 
     let tasks = localStorage.getItem('tasks');
@@ -168,3 +187,6 @@ completedBtn.addEventListener('click', () => {
 });
 
 clearCompletedBtn.addEventListener('click', clearCompleted);
+
+lightModeBtn.addEventListener('click', toggleDark);
+darkModeBtn.addEventListener('click', toggleLight);
