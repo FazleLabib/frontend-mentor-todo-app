@@ -248,6 +248,10 @@ input[type=text] {
     border-bottom: 1px solid var(--border-color);
 }
 
+.hidden {
+    display: none;
+}
+
 footer {
     position: absolute;
     bottom: 1rem;
