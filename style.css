@@ -10,14 +10,6 @@
     
     /* ### Neutral */
     
-    /* ### Light Theme */
-    
-    /* --Very-Light-Gray: hsl(0, 0%, 98%);
-    --Very-Light-Grayish-Blue: hsl(236, 33%, 92%);
-    --Light Grayish Blue: hsl(233, 11%, 84%);
-    --Dark Grayish Blue: hsl(236, 9%, 61%);
-    --Veryrayish-Blue: hsl(235, 19%, 35%); */
-    
     /* ### Dark Theme */
     
     --background-color: hsl(235, 21%, 11%);
@@ -28,6 +20,15 @@
     --border-color: hsl(233, 14%, 35%);
 }
 
+.light-theme {
+
+    /* ### Light Theme */
+    --background-color: hsl(236, 33%, 92%);
+    --card-color: hsl(0, 0%, 98%);
+    --border-color: hsl(233, 11%, 84%);
+    --hover-text-color: hsl(236, 9%, 61%);
+    --text-color: hsl(235, 19%, 35%);
+}
 * {
     margin: 0;
     padding: 0;
@@ -71,6 +72,10 @@ main {
     letter-spacing: 0.85rem;
     font-weight: 700;
     font-size: 2.5rem;
+}
+
+.header img {
+    cursor: pointer;
 }
 
 form {
