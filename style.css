@@ -11,7 +11,6 @@
     /* ### Neutral */
     
     /* ### Dark Theme */
-    
     --background-color: hsl(235, 21%, 11%);
     --card-color: hsl(235, 24%, 19%);
     --text-color: hsl(234, 39%, 85%);
@@ -29,6 +28,7 @@
     --hover-text-color: hsl(236, 9%, 61%);
     --text-color: hsl(235, 19%, 35%);
 }
+
 * {
     margin: 0;
     padding: 0;
@@ -116,7 +116,7 @@ input[type=text] {
     flex-direction: column;
     background-color: var(--card-color);
     border-radius: 0.25rem;
-    box-shadow: 20px 20px 50px -10px;
+    box-shadow: 20px 20px 50px -10px var(--background-color);
 }
 
 .task {
