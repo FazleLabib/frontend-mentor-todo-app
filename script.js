@@ -65,7 +65,12 @@ function showTasks() {
     checkbox.setAttribute('type', 'checkbox');
     checkbox.setAttribute('id', `checkbox-${index + 1}`);
       
-  
+    checkbox.addEventListener('change', () => {
+      // Recalculate count on checkbox change
+      uncheckedTaskCount = tasks.filter((t, i) => !document.getElementById(`checkbox-${i + 1}`).checked).length;
+      itemsLeft.innerHTML = `${uncheckedTaskCount} items left`;
+    });
+
     const checkboxLabel = document.createElement('label');
     checkboxLabel.setAttribute('for', `checkbox-${index + 1}`);
   
@@ -100,6 +105,10 @@ function showTasks() {
     
 
   });
+
+  // Set initial count of unchecked tasks
+  uncheckedTaskCount = tasks.filter((task, index) => !document.getElementById(`checkbox-${index + 1}`).checked).length;
+  itemsLeft.innerHTML = `${uncheckedTaskCount} items left`;
 
   if (tasks.length === 0) {
     noTasks.style.display = 'flex';
