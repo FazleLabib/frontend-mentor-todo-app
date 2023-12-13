@@ -102,8 +102,6 @@ function showTasks() {
         
     remainingTasks.appendChild(taskDiv);
 
-    
-
   });
 
   // Set initial count of unchecked tasks
