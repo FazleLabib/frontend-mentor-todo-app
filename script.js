@@ -54,54 +54,38 @@ function showTasks() {
   itemsLeft.innerHTML = `${taskCount} items left`;
   
   tasks.forEach((task, index) => {
-
     const taskDiv = document.createElement('div');
     taskDiv.classList.add('task');
   
-    const checkboxContainer = document.createElement('div');
-    checkboxContainer.classList.add('checkbox-container');
+    taskDiv.innerHTML = `
+      <div class="checkbox-container">
+        <input type="checkbox" id="checkbox-${index + 1}" />
+        <label for="checkbox-${index + 1}"></label>
+      </div>
+      <div class="task-content">
+        <p>${task}</p>
+        <button class="delete-task"><img src="./images/icon-cross.svg" alt="Cross/Close icon"></button>
+      </div>
+    `;
   
-    const checkbox = document.createElement('input');
-    checkbox.setAttribute('type', 'checkbox');
-    checkbox.setAttribute('id', `checkbox-${index + 1}`);
-      
-    checkbox.addEventListener('change', () => {
+    taskDiv.querySelector('.delete-task').addEventListener('click', () => {
+      deleteTask(index);
+    });
+  
+    taskDiv.querySelector('input[type="checkbox"]').addEventListener('change', (event) => {
+      const taskContent = event.target.closest('.task').querySelector('.task-content p');
+      if (event.target.checked) {
+        taskContent.style.textDecoration = 'line-through';
+      } else {
+        taskContent.style.textDecoration = 'none';
+      }
       // Recalculate count on checkbox change
       uncheckedTaskCount = tasks.filter((t, i) => !document.getElementById(`checkbox-${i + 1}`).checked).length;
       itemsLeft.innerHTML = `${uncheckedTaskCount} items left`;
     });
-
-    const checkboxLabel = document.createElement('label');
-    checkboxLabel.setAttribute('for', `checkbox-${index + 1}`);
   
-    checkboxContainer.appendChild(checkbox);
-    checkboxContainer.appendChild(checkboxLabel);
-  
-    const taskContentDiv = document.createElement('div');
-    taskContentDiv.classList.add('task-content');
-  
-    const taskParagraph = document.createElement('p');
-    taskParagraph.textContent = task;
-  
-    const deleteButton = document.createElement('button');
-    deleteButton.classList.add('delete-task');
-    const deleteIcon = document.createElement('img');
-    deleteIcon.setAttribute('src', './images/icon-cross.svg');
-    deleteIcon.setAttribute('alt', 'Cross/Close icon');
-    deleteButton.appendChild(deleteIcon);
-    
-    deleteButton.addEventListener('click', () => {
-      deleteTask(index);
-    });
-  
-    taskContentDiv.appendChild(taskParagraph);
-    taskContentDiv.appendChild(deleteButton);
-  
-    taskDiv.appendChild(checkboxContainer);
-    taskDiv.appendChild(taskContentDiv);
-        
     remainingTasks.appendChild(taskDiv);
-
+    
   });
 
   // Set initial count of unchecked tasks
