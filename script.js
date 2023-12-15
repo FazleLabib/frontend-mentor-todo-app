@@ -97,19 +97,6 @@ function showTasks() {
   } else {
     noTasks.style.display = 'none';
   }
-
-  // Strikes through completed tasks
-  const checkboxes = document.querySelectorAll('.checkbox-container input[type="checkbox"]');
-  for (const checkbox of checkboxes) {
-    checkbox.addEventListener('change', (event) => {
-      const taskContent = event.target.closest('.task').querySelector('.task-content p');
-      if (checkbox.checked) {
-        taskContent.style.textDecoration = 'line-through';
-      } else {
-        taskContent.style.textDecoration = 'none';
-      }
-    });
-  }
     
 }
   
