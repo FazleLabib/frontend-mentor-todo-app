@@ -27,65 +27,68 @@ function toggleDark() {
 }
 
 function getTasks() {
-
-    let tasks = localStorage.getItem('tasks');
-
-    if (tasks) {
-      return JSON.parse(tasks);
-    }
-
+  let tasks = JSON.parse(localStorage.getItem('tasks'));
+  if (!tasks) {
     return [];
+  }
 
+  // Add check for undefined completed property and set it to false if missing
+  return tasks.map((task) => (task.completed === undefined ? { ...task, completed: false } : task));
+  
 }
 
 function saveTasks(tasks) {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+  localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+
 function showTasks() {
-
   const remainingTasks = document.querySelector('.remaining-tasks');
-
   remainingTasks.innerHTML = '';
-  
+
   const tasks = getTasks();
-  
+  let uncheckedTaskCount = 0;
+
   tasks.forEach((task, index) => {
     const taskDiv = document.createElement('div');
     taskDiv.classList.add('task');
-  
+
     taskDiv.innerHTML = `
       <div class="checkbox-container">
-        <input type="checkbox" id="checkbox-${index + 1}" />
+        <input type="checkbox" id="checkbox-${index + 1}" ${task.completed ? 'checked' : ''}>
         <label for="checkbox-${index + 1}"></label>
       </div>
       <div class="task-content">
-        <p>${task}</p>
+      <p ${task.completed ? 'style="text-decoration: line-through;"' : ''}>${task.content || task}</p>
         <button class="delete-task"><img src="./images/icon-cross.svg" alt="Cross/Close icon"></button>
       </div>
     `;
-  
+
     taskDiv.querySelector('.delete-task').addEventListener('click', () => {
       deleteTask(index);
     });
-  
+
     taskDiv.querySelector('input[type="checkbox"]').addEventListener('change', (event) => {
       const taskContent = event.target.closest('.task').querySelector('.task-content p');
+      task.completed = event.target.checked;
       if (event.target.checked) {
         taskContent.style.textDecoration = 'line-through';
+        uncheckedTaskCount--;
       } else {
         taskContent.style.textDecoration = 'none';
+        uncheckedTaskCount++;
       }
-      // Recalculate count on checkbox change
-      uncheckedTaskCount = tasks.filter((t, i) => !document.getElementById(`checkbox-${i + 1}`).checked).length;
+      saveTasks(tasks);
       itemsLeft.innerHTML = `${uncheckedTaskCount} items left`;
     });
-  
+
     remainingTasks.appendChild(taskDiv);
-    
+
+    if (!task.completed) {
+      uncheckedTaskCount++;
+    }
   });
 
-  uncheckedTaskCount = tasks.filter((task, index) => !document.getElementById(`checkbox-${index + 1}`).checked).length;
   itemsLeft.innerHTML = `${uncheckedTaskCount} items left`;
 
   if (tasks.length === 0) {
@@ -93,22 +96,19 @@ function showTasks() {
   } else {
     noTasks.style.display = 'none';
   }
-    
 }
-  
+
 function addTask() {
+  const taskContent = input.value.trim();
 
-    const task = input.value.trim();
-  
-    if (task !== '') {
-      let tasks = getTasks();
-      tasks.push(task);
-      saveTasks(tasks);
-  
-      showTasks();
-      input.value = '';
-    }
+  if (taskContent !== '') {
+    let tasks = getTasks();
+    tasks.push({ content: taskContent, completed: false });
+    saveTasks(tasks);
 
+    showTasks();
+    input.value = '';
+  }
 }
 
 function deleteTask(index) {
