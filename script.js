@@ -49,9 +49,6 @@ function showTasks() {
   remainingTasks.innerHTML = '';
   
   const tasks = getTasks();
-
-  let taskCount = tasks.length;
-  itemsLeft.innerHTML = `${taskCount} items left`;
   
   tasks.forEach((task, index) => {
     const taskDiv = document.createElement('div');
@@ -88,7 +85,6 @@ function showTasks() {
     
   });
 
-  // Set initial count of unchecked tasks
   uncheckedTaskCount = tasks.filter((task, index) => !document.getElementById(`checkbox-${index + 1}`).checked).length;
   itemsLeft.innerHTML = `${uncheckedTaskCount} items left`;
 
