@@ -98,6 +98,53 @@ function showTasks() {
   }
 }
 
+function showActiveTasks() {
+  const remainingTasks = document.querySelector('.remaining-tasks');
+  remainingTasks.innerHTML = '';
+
+  const tasks = getTasks().filter(task => !task.completed);
+
+  tasks.forEach((task, index) => {
+    const taskDiv = document.createElement('div');
+    taskDiv.classList.add('task');
+
+    taskDiv.innerHTML = `
+      <div class="checkbox-container">
+        <input type="checkbox" id="checkbox-${index + 1}" ${task.completed ? 'checked' : ''}>
+        <label for="checkbox-${index + 1}"></label>
+      </div>
+      <div class="task-content">
+        <p ${task.completed ? 'style="text-decoration: line-through;"' : ''}>${task.content || task}</p>
+        <button class="delete-task"><img src="./images/icon-cross.svg" alt="Cross/Close icon"></button>
+      </div>
+    `;
+
+    taskDiv.querySelector('.delete-task').addEventListener('click', () => {
+      deleteTask(index);
+    });
+
+    taskDiv.querySelector('input[type="checkbox"]').addEventListener('change', (event) => {
+      const taskContent = event.target.closest('.task').querySelector('.task-content p');
+      task.completed = event.target.checked;
+      if (event.target.checked) {
+        taskContent.style.textDecoration = 'line-through';
+      } else {
+        taskContent.style.textDecoration = 'none';
+      }
+      saveTasks(tasks);
+      showActiveTasks();
+    });
+
+    remainingTasks.appendChild(taskDiv);
+  });
+
+  if (tasks.length === 0) {
+    noTasks.style.display = 'flex';
+  } else {
+    noTasks.style.display = 'none';
+  }
+}
+
 function addTask() {
   const taskContent = input.value.trim();
 
@@ -153,7 +200,8 @@ allBtn.addEventListener('click', () => {
 });
 
 activeBtn.addEventListener('click', () => {
-    handleButtonClick(activeBtn);
+  handleButtonClick(activeBtn);
+  showActiveTasks();
 });
 
 completedBtn.addEventListener('click', () => {
