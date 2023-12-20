@@ -52,7 +52,7 @@ function showTasks() {
   tasks.forEach((task, index) => {
     const taskDiv = document.createElement('div');
     taskDiv.classList.add('task');
-
+    taskDiv.setAttribute('draggable', 'true');
     taskDiv.innerHTML = `
       <div class="checkbox-container">
         <input type="checkbox" id="checkbox-${index + 1}" ${task.completed ? 'checked' : ''}>
@@ -260,3 +260,41 @@ clearCompletedBtn.addEventListener('click', clearCompleted);
 
 lightModeBtn.addEventListener('click', toggleDark);
 darkModeBtn.addEventListener('click', toggleLight);
+
+// Make tasks draggable
+const taskDivs = document.querySelectorAll('.task');
+taskDivs.forEach(taskDiv => {
+  taskDiv.addEventListener('dragstart', () => {
+    taskDiv.classList.add('dragging');
+  });
+  taskDiv.addEventListener('dragend', () => {
+    taskDiv.classList.remove('dragging');
+
+    // Update tasks in local storage after reordering
+    const tasks = Array.from(document.querySelectorAll('.task')).map(task => {
+      return {
+        content: task.querySelector('.task-content p').textContent,
+        completed: task.querySelector('input[type="checkbox"]').checked
+      };
+    });
+    saveTasks(tasks);
+  });
+});
+
+// Handle task reordering
+const remainingTasksContainer = document.querySelector('.remaining-tasks');
+remainingTasksContainer.addEventListener('dragover', (e) => {
+  e.preventDefault();
+});
+remainingTasksContainer.addEventListener('drop', (e) => {
+  const draggingTask = document.querySelector('.dragging');
+  const dragOverTask = e.target.closest('.task'); // Get the task being hovered over
+
+  if (dragOverTask) {
+    // Insert the dragging task before the hovered task
+    remainingTasksContainer.insertBefore(draggingTask, dragOverTask);
+  } else {
+    // If not hovering over a task, append to the end
+    remainingTasksContainer.appendChild(draggingTask);
+  }
+});
