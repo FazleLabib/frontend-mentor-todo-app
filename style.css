@@ -272,6 +272,10 @@ footer {
     .container {
         width: 22rem;
     }
-    
+
+    .header h1 {
+        letter-spacing: 0.5rem;
+        font-size: 2rem;
+    }
 
 }
