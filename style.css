@@ -282,4 +282,12 @@ footer {
         font-size: 1rem;
     }
 
+    .filters {
+        align-items: center;
+        justify-content: center;
+        margin-top: 2rem;
+        background-color: var(--card-color);
+        padding: 1rem;
+        border-radius: 0.25rem;
+    }
 }
