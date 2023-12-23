@@ -281,20 +281,27 @@ taskDivs.forEach(taskDiv => {
   });
 });
 
-// Handle task reordering
-const remainingTasksContainer = document.querySelector('.remaining-tasks');
-remainingTasksContainer.addEventListener('dragover', (e) => {
-  e.preventDefault();
-});
-remainingTasksContainer.addEventListener('drop', (e) => {
-  const draggingTask = document.querySelector('.dragging');
-  const dragOverTask = e.target.closest('.task'); // Get the task being hovered over
+function changeOptionsLayout() {
+  const filtersDiv = document.querySelector('.filters');
+  const instructions = document.querySelector('.instruction');
+  const containerDiv = document.querySelector('.container');
 
-  if (dragOverTask) {
-    // Insert the dragging task before the hovered task
-    remainingTasksContainer.insertBefore(draggingTask, dragOverTask);
+  if (window.innerWidth <= 600) {
+    // Move filters class before instructions class:
+    containerDiv.insertBefore(filtersDiv, instructions);
   } else {
-    // If not hovering over a task, append to the end
-    remainingTasksContainer.appendChild(draggingTask);
+    // Move filters class inside options class:
+    const optionsDiv = document.querySelector('.options');
+    optionsDiv.insertBefore(filtersDiv, optionsDiv.querySelector('#clear-completed'));
   }
-});
+}
+
+window.addEventListener('resize', changeOptionsLayout);
+changeOptionsLayout();
+
+
+
+
+
+
+
