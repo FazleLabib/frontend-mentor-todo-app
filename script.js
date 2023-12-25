@@ -15,16 +15,34 @@ function toggleLight() {
   document.body.classList.toggle('light-theme');
   lightModeBtn.classList.remove('hidden');
   darkModeBtn.classList.add('hidden');
-
-  document.querySelector('.background').style.backgroundImage = 'url("./images/bg-desktop-dark.jpg")';
+  setBackground();
 }
 
 function toggleDark() {
   document.body.classList.toggle('light-theme');
   lightModeBtn.classList.add('hidden');
   darkModeBtn.classList.remove('hidden');
-  document.querySelector('.background').style.backgroundImage = 'url("./images/bg-desktop-light.jpg")';
+  setBackground();
 }
+
+function setBackground() {
+  if (window.innerWidth <= 600) {
+    if (document.body.classList.contains('light-theme')) {
+      document.querySelector('.background').style.backgroundImage = 'url("./images/bg-mobile-light.jpg")';
+    } else {
+      document.querySelector('.background').style.backgroundImage = 'url("./images/bg-mobile-dark.jpg")';
+    }
+  } else {
+    if (document.body.classList.contains('light-theme')) {
+      document.querySelector('.background').style.backgroundImage = 'url("./images/bg-desktop-light.jpg")';
+    } else {
+      document.querySelector('.background').style.backgroundImage = 'url("./images/bg-desktop-dark.jpg")';
+    }
+  }
+}
+
+setBackground();
+window.addEventListener('resize', setBackground);
 
 function getTasks() {
   let tasks = JSON.parse(localStorage.getItem('tasks'));
