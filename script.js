@@ -91,9 +91,11 @@ function showTasks() {
       task.completed = event.target.checked;
       if (event.target.checked) {
         taskContent.style.textDecoration = 'line-through';
+        taskContent.style.color = `var(--secondary-text-color)`;
         uncheckedTaskCount--;
       } else {
         taskContent.style.textDecoration = 'none';
+        taskContent.style.color = `var(--text-color)`;
         uncheckedTaskCount++;
       }
       saveTasks(tasks);
