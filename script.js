@@ -59,6 +59,18 @@ function saveTasks(tasks) {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+function createTask(taskDiv, task, index) {
+  taskDiv.innerHTML = `
+  <div class="checkbox-container">
+    <input type="checkbox" id="checkbox-${index + 1}" ${task.completed ? 'checked' : ''}>
+    <label for="checkbox-${index + 1}"></label>
+  </div>
+  <div class="task-content">
+  <p ${task.completed ? 'style="text-decoration: line-through;"' : ''}>${task.content || task}</p>
+    <button class="delete-task"><img src="./images/icon-cross.svg" alt="Cross/Close icon"></button>
+  </div>`;
+
+}
 
 function showTasks() {
   const remainingTasks = document.querySelector('.remaining-tasks');
@@ -71,16 +83,8 @@ function showTasks() {
     const taskDiv = document.createElement('div');
     taskDiv.classList.add('task');
     taskDiv.setAttribute('draggable', 'true');
-    taskDiv.innerHTML = `
-      <div class="checkbox-container">
-        <input type="checkbox" id="checkbox-${index + 1}" ${task.completed ? 'checked' : ''}>
-        <label for="checkbox-${index + 1}"></label>
-      </div>
-      <div class="task-content">
-      <p ${task.completed ? 'style="text-decoration: line-through;"' : ''}>${task.content || task}</p>
-        <button class="delete-task"><img src="./images/icon-cross.svg" alt="Cross/Close icon"></button>
-      </div>
-    `;
+
+    createTask(taskDiv, task, index);
 
     taskDiv.querySelector('.delete-task').addEventListener('click', () => {
       deleteTask(index);
@@ -128,16 +132,7 @@ function showActiveTasks() {
     const taskDiv = document.createElement('div');
     taskDiv.classList.add('task');
 
-    taskDiv.innerHTML = `
-      <div class="checkbox-container">
-        <input type="checkbox" id="checkbox-${index + 1}" ${task.completed ? 'checked' : ''}>
-        <label for="checkbox-${index + 1}"></label>
-      </div>
-      <div class="task-content">
-        <p ${task.completed ? 'style="text-decoration: line-through;"' : ''}>${task.content || task}</p>
-        <button class="delete-task"><img src="./images/icon-cross.svg" alt="Cross/Close icon"></button>
-      </div>
-    `;
+    createTask(taskDiv, task, index);
 
     taskDiv.querySelector('.delete-task').addEventListener('click', () => {
       deleteTask(index);
@@ -175,16 +170,7 @@ function showCompletedTasks() {
     const taskDiv = document.createElement('div');
     taskDiv.classList.add('task');
 
-    taskDiv.innerHTML = `
-      <div class="checkbox-container">
-        <input type="checkbox" id="checkbox-${index + 1}" ${task.completed ? 'checked' : ''}>
-        <label for="checkbox-${index + 1}"></label>
-      </div>
-      <div class="task-content">
-        <p ${task.completed ? 'style="text-decoration: line-through;"' : ''}>${task.content || task}</p>
-        <button class="delete-task"><img src="./images/icon-cross.svg" alt="Cross/Close icon"></button>
-      </div>
-    `;
+    createTask(taskDiv, task, index);
 
     taskDiv.querySelector('.delete-task').addEventListener('click', () => {
       deleteTask(index);
