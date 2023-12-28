@@ -72,14 +72,21 @@ function createTask(taskDiv, task, index) {
 
 }
 
-function showTasks() {
+function renderTasks(filter = 'all') {
   const remainingTasks = document.querySelector('.remaining-tasks');
   remainingTasks.innerHTML = '';
 
   const tasks = getTasks();
-  let uncheckedTaskCount = 0;
 
-  tasks.forEach((task, index) => {
+  let filteredTasks = tasks;
+
+  if (filter === 'active') {
+    filteredTasks = tasks.filter(task => !task.completed);
+  } else if (filter === 'completed') {
+    filteredTasks = tasks.filter(task => task.completed);
+  }
+
+  filteredTasks.forEach((task, index) => {
     const taskDiv = document.createElement('div');
     taskDiv.classList.add('task');
     taskDiv.setAttribute('draggable', 'true');
@@ -88,6 +95,7 @@ function showTasks() {
 
     taskDiv.querySelector('.delete-task').addEventListener('click', () => {
       deleteTask(index);
+      renderTasks(filter);
     });
 
     taskDiv.querySelector('input[type="checkbox"]').addEventListener('change', (event) => {
@@ -95,107 +103,41 @@ function showTasks() {
       task.completed = event.target.checked;
       if (event.target.checked) {
         taskContent.style.textDecoration = 'line-through';
-        taskContent.style.color = `var(--secondary-text-color)`;
-        uncheckedTaskCount--;
       } else {
         taskContent.style.textDecoration = 'none';
-        taskContent.style.color = `var(--text-color)`;
-        uncheckedTaskCount++;
       }
       saveTasks(tasks);
-      itemsLeft.innerHTML = `${uncheckedTaskCount} items left`;
+      renderTasks(filter);
     });
 
     remainingTasks.appendChild(taskDiv);
-
-    if (!task.completed) {
-      uncheckedTaskCount++;
-    }
   });
 
-  itemsLeft.innerHTML = `${uncheckedTaskCount} items left`;
-
-  if (tasks.length === 0) {
+  if (filteredTasks.length === 0) {
     noTasks.style.display = 'flex';
   } else {
     noTasks.style.display = 'none';
   }
+
+  if (filter === 'all') {
+    itemsLeft.innerHTML = `${tasks.filter(task => !task.completed).length} items left`;
+  } else if (filter === 'active') {
+    itemsLeft.innerHTML = `${filteredTasks.length} items left`;
+  } else {
+    itemsLeft.innerHTML = ''; // No count for completed tasks view
+  }
+}
+
+function showTasks() {
+  renderTasks('all');
 }
 
 function showActiveTasks() {
-  const remainingTasks = document.querySelector('.remaining-tasks');
-  remainingTasks.innerHTML = '';
-
-  const tasks = getTasks().filter(task => !task.completed);
-
-  tasks.forEach((task, index) => {
-    const taskDiv = document.createElement('div');
-    taskDiv.classList.add('task');
-
-    createTask(taskDiv, task, index);
-
-    taskDiv.querySelector('.delete-task').addEventListener('click', () => {
-      deleteTask(index);
-    });
-
-    taskDiv.querySelector('input[type="checkbox"]').addEventListener('change', (event) => {
-      const taskContent = event.target.closest('.task').querySelector('.task-content p');
-      task.completed = event.target.checked;
-      if (event.target.checked) {
-        taskContent.style.textDecoration = 'line-through';
-      } else {
-        taskContent.style.textDecoration = 'none';
-      }
-      saveTasks(tasks);
-      showActiveTasks();
-    });
-
-    remainingTasks.appendChild(taskDiv);
-  });
-
-  if (tasks.length === 0) {
-    noTasks.style.display = 'flex';
-  } else {
-    noTasks.style.display = 'none';
-  }
+  renderTasks('active');
 }
 
 function showCompletedTasks() {
-  const remainingTasks = document.querySelector('.remaining-tasks');
-  remainingTasks.innerHTML = '';
-
-  const tasks = getTasks().filter(task => task.completed);
-
-  tasks.forEach((task, index) => {
-    const taskDiv = document.createElement('div');
-    taskDiv.classList.add('task');
-
-    createTask(taskDiv, task, index);
-
-    taskDiv.querySelector('.delete-task').addEventListener('click', () => {
-      deleteTask(index);
-    });
-
-    taskDiv.querySelector('input[type="checkbox"]').addEventListener('change', (event) => {
-      const taskContent = event.target.closest('.task').querySelector('.task-content p');
-      task.completed = event.target.checked;
-      if (event.target.checked) {
-        taskContent.style.textDecoration = 'line-through';
-      } else {
-        taskContent.style.textDecoration = 'none';
-      }
-      saveTasks(tasks);
-      showCompletedTasks();
-    });
-
-    remainingTasks.appendChild(taskDiv);
-  });
-
-  if (tasks.length === 0) {
-    noTasks.style.display = 'flex';
-  } else {
-    noTasks.style.display = 'none';
-  }
+  renderTasks('completed');
 }
 
 function addTask() {
