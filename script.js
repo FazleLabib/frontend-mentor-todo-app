@@ -122,12 +122,10 @@ function renderTasks(filter = 'all') {
     noTasks.style.display = 'none';
   }
 
-  if (filter === 'all') {
+  if (filter === 'all' || filter === 'completed') {
     itemsLeft.innerHTML = `${tasks.filter(task => !task.completed).length} items left`;
   } else if (filter === 'active') {
     itemsLeft.innerHTML = `${filteredTasks.length} items left`;
-  } else {
-    itemsLeft.innerHTML = ''; // No count for completed tasks view
   }
 }
 
