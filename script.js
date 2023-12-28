@@ -60,16 +60,17 @@ function saveTasks(tasks) {
 }
 
 function createTask(taskDiv, task, index) {
-  taskDiv.innerHTML = `
-  <div class="checkbox-container">
-    <input type="checkbox" id="checkbox-${index + 1}" ${task.completed ? 'checked' : ''}>
-    <label for="checkbox-${index + 1}"></label>
-  </div>
-  <div class="task-content">
-  <p ${task.completed ? 'style="text-decoration: line-through;"' : ''}>${task.content || task}</p>
-    <button class="delete-task"><img src="./images/icon-cross.svg" alt="Cross/Close icon"></button>
-  </div>`;
+  const completedStyle = task.completed ? 'style="text-decoration: line-through; color: var(--secondary-text-color);"' : '';
 
+  taskDiv.innerHTML = `
+    <div class="checkbox-container">
+      <input type="checkbox" id="checkbox-${index + 1}" ${task.completed ? 'checked' : ''}>
+      <label for="checkbox-${index + 1}"></label>
+    </div>
+    <div class="task-content">
+      <p ${completedStyle}>${task.content || task}</p>
+      <button class="delete-task"><img src="./images/icon-cross.svg" alt="Cross/Close icon"></button>
+    </div>`;
 }
 
 function renderTasks(filter = 'all') {
@@ -103,8 +104,10 @@ function renderTasks(filter = 'all') {
       task.completed = event.target.checked;
       if (event.target.checked) {
         taskContent.style.textDecoration = 'line-through';
+        taskContent.style.color = 'var(--secondary-text-color)';
       } else {
         taskContent.style.textDecoration = 'none';
+        taskContent.style.color = 'var(--text-color)';
       }
       saveTasks(tasks);
       renderTasks(filter);
