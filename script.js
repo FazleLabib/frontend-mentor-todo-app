@@ -71,6 +71,29 @@ function createTask(taskDiv, task, index) {
       <p ${completedStyle}>${task.content || task}</p>
       <button class="delete-task"><img src="./images/icon-cross.svg" alt="Cross/Close icon"></button>
     </div>`;
+
+  taskDiv.addEventListener('dragstart', (event) => {
+    event.dataTransfer.setData('text/plain', index); // Store the index of the dragged task
+  });
+
+  taskDiv.addEventListener('dragover', (event) => {
+    event.preventDefault(); // Allow dropping
+  });
+
+  taskDiv.addEventListener('drop', (event) => {
+    event.preventDefault();
+    const fromIndex = parseInt(event.dataTransfer.getData('text/plain'), 10);
+    const toIndex = index;
+
+    if (fromIndex !== toIndex) {
+      let tasks = getTasks();
+      const movedTask = tasks.splice(fromIndex, 1)[0];
+      tasks.splice(toIndex, 0, movedTask);
+      saveTasks(tasks);
+      renderTasks(); // Re-render tasks after reordering
+    }
+  });
+  
 }
 
 function renderTasks(filter = 'all') {
@@ -90,7 +113,7 @@ function renderTasks(filter = 'all') {
   filteredTasks.forEach((task, index) => {
     const taskDiv = document.createElement('div');
     taskDiv.classList.add('task');
-    taskDiv.setAttribute('draggable', 'true');
+    taskDiv.draggable = true;
 
     createTask(taskDiv, task, index);
 
@@ -210,26 +233,6 @@ clearCompletedBtn.addEventListener('click', clearCompleted);
 lightModeBtn.addEventListener('click', toggleDark);
 darkModeBtn.addEventListener('click', toggleLight);
 
-// Make tasks draggable
-const taskDivs = document.querySelectorAll('.task');
-taskDivs.forEach(taskDiv => {
-  taskDiv.addEventListener('dragstart', () => {
-    taskDiv.classList.add('dragging');
-  });
-  taskDiv.addEventListener('dragend', () => {
-    taskDiv.classList.remove('dragging');
-
-    // Update tasks in local storage after reordering
-    const tasks = Array.from(document.querySelectorAll('.task')).map(task => {
-      return {
-        content: task.querySelector('.task-content p').textContent,
-        completed: task.querySelector('input[type="checkbox"]').checked
-      };
-    });
-    saveTasks(tasks);
-  });
-});
-
 function changeOptionsLayout() {
   const filtersDiv = document.querySelector('.filters');
   const instructions = document.querySelector('.instruction');
@@ -247,10 +250,3 @@ function changeOptionsLayout() {
 
 window.addEventListener('resize', changeOptionsLayout);
 changeOptionsLayout();
-
-
-
-
-
-
-
