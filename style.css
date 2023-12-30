@@ -39,14 +39,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: var(--background-color);
 }
 
 .background {
     width: 100%;
     min-height: 100vh;
     min-height: 100dvh;
-    background: url(./images/bg-desktop-dark.jpg), var(--background-color);
-    background-position: center top, center;
+    background: url(./images/bg-desktop-dark.jpg);
+    background-position: center top;
     background-repeat: no-repeat;
     background-size: contain;
 }
