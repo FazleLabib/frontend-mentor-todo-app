@@ -44,6 +44,7 @@ body {
 .background {
     width: 100%;
     min-height: 100vh;
+    min-height: 100dvh;
     background: url(./images/bg-desktop-dark.jpg), var(--background-color);
     background-position: center top, center;
     background-repeat: no-repeat;
