@@ -177,9 +177,11 @@ input[type=text] {
 }
 
 .task .checkbox-container label:hover {
-    border: 1px solid;
-    border-image: linear-gradient(to right, hsl(192, 100%, 67%), hsl(280, 87%, 65%)) 1;
-    /* Fix border radius issue */
+    background: 
+    linear-gradient(var(--card-color) 0 0) padding-box,
+    linear-gradient(to right, hsl(192, 100%, 67%), hsl(280, 87%, 65%)) border-box;
+    border: 1px solid transparent;
+    border-radius: 50%;
 }   
 
 .task-content {
