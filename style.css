@@ -223,9 +223,6 @@ input[type=text] {
     outline: none;
     border: none;
     background-color: transparent;
-}
-
-.filters button p {
     font-size: 1rem;
     color: var(--secondary-text-color);
 }
@@ -237,13 +234,13 @@ input[type=text] {
     margin-top: 3rem;
 }
 
-.filters p:hover, #clear-completed:hover {
+.filters button:hover, #clear-completed:hover {
     transition: .2s ease-in-out;
     cursor: pointer;
     color: var(--hover-text-color);
 }
 
-.filters button .selected {
+.filters button.selected {
     color: var(--bright-blue);
 }
 
