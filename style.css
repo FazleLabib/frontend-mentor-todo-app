@@ -17,6 +17,7 @@
     --hover-text-color: hsl(236, 33%, 92%);
     --secondary-text-color: hsl(234, 11%, 52%);
     --border-color: hsl(233, 14%, 35%);
+    --shadow-color: hsl(235, 21%, 11%);
 }
 
 .light-theme {
@@ -27,6 +28,7 @@
     --border-color: hsl(233, 11%, 84%);
     --hover-text-color: hsl(236, 9%, 61%);
     --text-color: hsl(235, 19%, 35%);
+    --shadow-color: hsl(235, 21%, 11%);
 }
 
 * {
@@ -122,7 +124,7 @@ input[type=text] {
     flex-direction: column;
     background-color: var(--card-color);
     border-radius: 0.25rem;
-    box-shadow: 20px 20px 50px -10px var(--background-color);
+    box-shadow: 20px 20px 50px -50px var(--shadow-color);
 }
 
 .task {
